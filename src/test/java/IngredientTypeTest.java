@@ -1,16 +1,25 @@
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import praktikum.IngredientType;
 
-import static praktikum.IngredientType.*;
-
+@RunWith(Parameterized.class)
 public class IngredientTypeTest {
+    private final String expected;
+    public IngredientTypeTest(String expected){
+        this.expected=expected;
+    }
+    @Parameterized.Parameters
+    public static Object[][] getType() {
+        return new Object[][] {
+                {"SAUCE"},
+                {"FILLING"},
+        };
+    }
     @Test
-    public void isSauceExists(){
-        Assert.assertEquals("Неверное название типа игредиента","SAUCE", SAUCE.toString());
+    public void isTypeExists(){
+        Assert.assertEquals("Неверное название типа игредиента",expected,IngredientType.valueOf(expected).toString());
     }
 
-    @Test
-    public void isFillingExists(){
-        Assert.assertEquals("Неверное название типа игредиента","FILLING", FILLING.toString());
-    }
 }
